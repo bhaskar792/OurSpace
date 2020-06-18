@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Sign up</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="icon" type="image/png" href="../static/img/icons/favicon.ico" />
+
+	<link rel="stylesheet" type="text/css" href="../static/vendor/bootstrap/css/bootstrap.min.css">
+
+	<link rel="stylesheet" type="text/css" href="../static/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" type="text/css" href="../static/vendor/animate/animate.css">
+
+	<link rel="stylesheet" type="text/css" href="../static/vendor/css-hamburgers/hamburgers.min.css">
+
+	<link rel="stylesheet" type="text/css" href="../static/vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/hover.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/hover-min.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/util.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/main.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+
+</head>
+
+<style>
+	.btn-col{
+		background-image: linear-gradient(to right, #f31acf, #1029b6);
+	}
+	
+</style>
+
+<body style="background-color: #10375c;">
+
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<div class="login100-pic js-tilt" data-tilt>
+					<img src="../static/img/log.png" style="width: 100%; height: 50%; border-radius: 50px;" alt="OurSpace">
+				</div>
+
+				<form class="login100-form validate-form" action="/register_user" method="post"
+					enctype="multipart/form-data" id="wrap">
+					<span class="login100-form-title">
+						Member Sign Up
+					</span>
+					<div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+						<input class="input100" type="text" name="email" placeholder="Email" value="{{email}}" required>
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Password is required">
+						<input class="input100" type="password" name="pass" placeholder="Password" required>
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<!-- MY ATTEMPT AT IMAGE FETCHING -->
+					<div style="align-text:center;">
+						<label for="profilePhoto" class="btn btn-primary "
+							style="border-radius: 40px;margin-top:10px;margin-bottom:20px"><i class="fa fa-upload"></i>
+							&nbsp; Upload Profile Picture</label>
+						<input type="file" name="profilePhoto" size="40" id="profilePhoto" accept="image/*"
+							style="padding-bottom:7px;display: none">
+					</div>
+
+					<!-- <input name="profilePhotoPath" id="x" type="hidden"> -->
+					<!-- MY ATTEMPT AT IMAGE FETCHING -->
+
+
+					<div class="wrap-input100 validate-input" data-validate="Username is required">
+						<input class="input100" type="text" name="username" placeholder="Username" required>
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-person" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Gender is required">
+						<input class="input100" type="text" name="gender" placeholder="Gender" required>
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-person" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Date of Birth is required">
+						<input class="input100" type="date" name="dob" placeholder="Date of Birth" required > 
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-person" aria-hidden="true"></i>
+						</span>
+					</div>
+					<div id="school">
+						<div class="row ">
+							<div class="wrap-input100 validate-input school col-sm-10"
+								data-validate="School is required" id="addon" style="float:left">
+								<input class="input100" type="text" name="school0" placeholder="School">
+								<span class="focus-input100"></span>
+								<span class="symbol-input100">
+									<i class="fa fa-person" aria-hidden="true"></i>
+								</span>
+							</div>
+
+							<div class="add_component btn btn-primary col-sm-2" id="school_show/hide"
+								style="float:right;padding:10px;height:100%;max-width:80%;margin-top:4px"><i href='#'
+									class="fa fa-plus"></i></div>
+						</div>
+					</div>
+
+					<div id="phone">
+						<div class="row ">
+							<div class="wrap-input100 validate-input Phone col-sm-10"
+								data-validate="Phone number is required" id="addon" style="float:left">
+								<input class="input100" type="tel" name="phone_no0" placeholder="Phone No" pattern="[0-9]{10}">
+								<span class="focus-input100"></span>
+								<span class="symbol-input100">
+									<i class="fa fa-person" aria-hidden="true"></i>
+								</span>
+							</div>
+
+							<div class="add_component btn btn-primary col-sm-2" id="phone_show/hide"
+								style="float:right;padding:10px;height:100%;max-width:80%;margin-top:4px"><i href='#'
+									class="fa fa-plus"></i></div>
+						</div>
+					</div>
+
+					<script>
+						var school_ctr = 1;
+						document.getElementById('school_show/hide').onclick = function () {
+							var newDiv = $('<div class="wrap-input100 validate-input school" data-validate="School is required" id="addon"><input class="input100" type="text" name="school' + school_ctr + '" placeholder="School"><span class="focus-input100"></span><span class="symbol-input100"><i class="fa fa-person" aria-hidden="true"></i></span></div>');
+							//newDiv.style.background = "#000";
+							$('#school').append(newDiv);
+						}
+						var phone_ctr = 1;
+						document.getElementById('phone_show/hide').onclick = function () {
+							var newDiv = $('<div class="wrap-input100 validate-input Phone" data-validate="Phone number is required" id="addon"><input class="input100" type="text" name="phone_no' + phone_ctr + '" placeholder="Phone No"><span class="focus-input100"></span><span class="symbol-input100"><i class="fa fa-person" aria-hidden="true"></i></span></div>');
+							//newDiv.style.background = "#000";
+							$('#phone').append(newDiv);
+						}
+					</script>
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn btn-col hvr-bounce-to-left">
+							Sign Up
+						</button>
+					</div>
+					<br>
+					<br>
+					<br>
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<script src="../static/vendor/jquery/jquery-3.2.1.min.js"></script>
+
+	<script src="../static/vendor/bootstrap/js/popper.js"></script>
+	<script src="../static/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+	<script src="../static/vendor/select2/select2.min.js"></script>
+
+	<script src="../static/vendor/tilt/tilt.jquery.min.js"></script>
+	<script>
+		$('.js-tilt').tilt({
+			scale: 1.1
+		})
+	</script>
+
+	<script src="js/main.js"></script>
+	<script>
+		$('#profilePhoto').change(function (event) {
+			var tmppath = URL.createObjectURL(event.target.files[0]);
+			// var x = document.getElementById("profilePhoto").value;
+			$('#x').val(tmppath);
+			console.log(tmppath)
+		});
+
+
+		var private_socket = io('http://127.0.0.1:5000/private');
+		var myEmail = '{{email}}';
+		private_socket.emit('email', myEmail);
+
+	</script>
+
+</body>
+
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<title>My profile</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link href="../static/css/bootstrap.css" rel="stylesheet">
+<link href="../static/css/news_feed.css" rel="stylesheet">
+<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="/resources/demos/style.css"> -->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="../static/js/bootstrap.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('[data-toggle=offcanvas]').click(function () {
+            $(this).toggleClass('visible-xs text-center');
+            $(this).find('i').toggleClass('glyphicon-chevron-right glyphicon-chevron-left');
+            $('.row-offcanvas').toggleClass('active');
+            $('#lg-menu').toggleClass('hidden-xs').toggleClass('visible-xs');
+            $('#xs-menu').toggleClass('visible-xs').toggleClass('hidden-xs');
+            $('#btnShow').toggle();
+        });
+    });
+</script>
+<style>
+    html,
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: "Roboto", sans-serif
+    }
+
+    .fa {
+        color: #3b5999;
+    }
+    .he{
+        margin-top: 0.5em;
+    }
+    a{
+        color: bisque;
+    }
+    a:visited{
+        color: bisque;
+    }
+    .prof:hover{
+        color: #1f4068;
+    }
+</style>
+
+
+<body>
+    <!-- <div> -->
+    <!-- <div class="wrapper">
+        <div class="box">
+            <div class="row row-offcanvas row-offcanvas-left"> -->
+
+    <div class="column col-sm-12 col-xs-12" id="main">
+        <div class="navbar navbar-static-top" style="display: block; background-color: #10375c;">
+            <div class="navbar-header">
+                <!-- <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button> -->
+                <a href="#" class="navbar-brand "><img src="../static/img/logo1.jpg" style="height: 1.7em; margin-top: 3px; border-radius: 40px;" alt="OurSpace"></a>
+            </div>
+            <nav class="collapse navbar-collapse he" role="navigation">
+                <form class="navbar-form navbar-left" action="/search_results" method="post">
+                    <div class="input-group input-group-sm" style="max-width:240px;">
+                        <input type="text" id="username" name="username" placeholder="Search">
+                        <datalist id="json-datalist">
+                        </datalist>
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit"><i
+                                    class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="/news_feed"><i class="glyphicon glyphicon-home"></i> Home</a>
+                    </li>
+                    <!-- <li>
+                            <a href="#postModal" role="button" data-toggle="modal"><i
+                                    class="glyphicon glyphicon-plus"></i>
+                                Post</a>
+                        </li>
+                        <li>
+                            <a href="/chat"><span class="badge">Chat</span></a>
+                        </li> -->
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                                class="glyphicon glyphicon-user"></i>{{myEmail}}</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/myProfile">My Profile</a></li>
+                            <!-- <li><a href="/settings">Settings</a></li> -->
+                            <li><a href="/logout">Log out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <!-- /top nav -->
+        <!-- Page Container -->
+        <br>
+        <br>
+        <br>
+        <div class="w3-content w3-margin-top" style="max-width:1400px;">
+
+            <!-- The Grid -->
+            <div class="w3-row-padding">
+
+                <!-- Left Column -->
+                <div class="w3-third">
+
+                    <div class="w3-white w3-text-grey w3-card-4">
+                        <div class="w3-display-container">
+                            <img src="data:;base64,{{ image }}" style="width:100%" alt="Avatar"
+                                onerror="this.src='https://miro.medium.com/max/560/1*MccriYX-ciBniUzRKAUsAw.png'">
+                            <div class="w3-display-bottomleft w3-container w3-text-black">
+
+                            </div>
+                        </div>
+                        <br>
+                        <div class="w3-container">
+                            <h2>{{username}}</h2>
+                            <!-- <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text"></i>NITK
+                                </p> -->
+                            <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text"></i>{{email}}
+                            </p>
+                            {% for s in school %}
+                            <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text edited"></i>{{s}}
+                            </p>
+                            {% endfor %}
+                            {% for p in phone %}
+                            <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text edited"></i>{{p}}
+                            </p>
+                            {% endfor %}
+                            <p><i class="fa fa-venus-mars fa-fw w3-margin-right w3-large w3-text edited"></i>{{gender}}
+                            </p>
+                            <p><i class="fa fa-calendar fa-fw w3-margin-right w3-large w3-text edited"></i>{{dob}}
+                            </p>
+
+                            <form action="{{ url_for('send_friend_request') }}" method="post">
+                                <input type="hidden" name="email" id="email">
+                                <input type="hidden" name="friendStatus" id="friendStatus" value={{friendStatus}}>
+                                <input type="hidden" name="request1Status" id="request1Status" value={{request1Status}}>
+                                <input type="hidden" name="request2Status" id="request2Status" value={{request2Status}}>
+                                <script>
+                                    document.getElementById('email').value = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);                                
+                                </script>
+                                {% if request1Status == 0 and friendStatus == 0 and request2Status == 0%}
+                                <button class="btn btn-success" type="submit"> Send connection request</button>
+                                {% elif request2Status == 1 %}
+                                <button class="btn btn-success" type="submit" disabled> Connection Sent</button>
+                                {% elif request1Status == 1 %}
+                                <button class="btn btn-success" type="submit"> Accept Connection</button>
+                                {% elif friendStatus == 1 %}
+                                <button class="btn btn-success" type="submit" disabled> Connected!</button>
+                                {% endif %}
+                            </form>
+                            <!-- <a href="/send_friend_request"> <button type="button" class="btn btn-success">Send
+                                        friend
+                                        request</button></a> -->
+                            <hr>
+
+                            
+                        </div>
+                    </div><br>
+
+                    <!-- End Left Column -->
+                </div>
+
+                <!-- Right Column -->
+                <div class="w3-twothird">
+
+                    <div class="w3-container w3-card w3-white w3-margin-bottom">
+                        <h2 class="w3-text-grey w3-padding-16"><i
+                                class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text"></i>Posts
+                        </h2>
+                        
+                        {% if friendStatus==1 %}
+                        {% for post in posts %}
+                        <div class="w3-container">
+                            <h3 class="w3-opacity"><b>{{post['username']}}</b>
+                                <p style="float:right;font-style: normal; font-size: 0.7em;">{{post['timestamp']}}</p>
+                            </h3>
+
+                            
+                            {% if post['image'] != "" %}
+                            <img src="data:;base64,{{post['image'] }}"
+                                style="margin:15px;margin-left: 0;max-width: 100%;">
+                            {% endif %}
+
+                            <h4>{{post['text']}}</h4>
+
+                            <hr>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+
+                    <!-- End Right Column -->
+                </div>
+
+                <!-- End Grid -->
+            </div>
+
+            <!-- End Page Container -->
+        </div>
+
+    </div>
+    <!-- </div>
+        </div>
+    </div> -->
+</body>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+</html>
