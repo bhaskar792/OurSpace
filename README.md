@@ -7,7 +7,7 @@ Made by:-
 Bhaskar Kataria (181CO213)
 Ketan Bhujange (181CO227)
 
-## Languages, Technologies and Frameworks
+## Tech Stack
 - Python
 - Flask
 - MySQL
