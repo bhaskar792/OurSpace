@@ -7,12 +7,12 @@ Made by:-
 Bhaskar Kataria (181CO213)
 Ketan Bhujange (181CO227)
 
-## Languages, Technologies & Frameworks
+## Languages , Technologies & Frameworks
 - Python
 - Flask
 - MySQL
 - HTML
-- CSS
+- Cascading Style Sheets
 - Bootstrap
 - JavaScript
 - JQuery
