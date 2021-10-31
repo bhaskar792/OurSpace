@@ -11,7 +11,7 @@ Ketan Bhujange (181CO227)
 - Python
 - Flask
 - MySQL
-- HTML
+- HyperText Markup Language
 - Cascading Style Sheets
 - Bootstrap
 - JavaScript
